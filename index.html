@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تطبيق إملاء وتحويل الصوت إلى نص بتصميم عصري وأداء سريع">
+    <title>VoiceWeaver | تحويل الصوت إلى نص</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container glass-panel">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fa-solid fa-microphone-lines"></i>
+                <h1>VoiceWeaver</h1>
+            </div>
+            
+            <div class="controls-top">
+                <label for="language-select" class="sr-only">اختر اللغة</label>
+                <div class="custom-select">
+                    <select id="language-select">
+                        <option value="ar-SA" selected>العربية (السعودية)</option>
+                        <option value="ar-AE">العربية (الإمارات)</option>
+                        <option value="ar-EG">العربية (مصر)</option>
+                        <option value="en-US">English (US)</option>
+                        <option value="en-GB">English (UK)</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-icon"></i>
+                </div>
+            </div>
+        </header>
+
+        <section class="editor-section">
+            <div class="status-indicator">
+                <span id="recording-status" class="status-text">انقر على الميكروفون للبدء</span>
+                <div id="recording-dot" class="dot"></div>
+            </div>
+            
+            <div class="text-area-wrapper">
+                <textarea id="result-text" placeholder="سيبدأ النص بالظهور هنا..." spellcheck="false" dir="auto"></textarea>
+            </div>
+        </section>
+
+        <footer class="app-actions">
+            <div class="action-group secondary-actions">
+                <button id="btn-copy" class="icon-btn" title="نسخ النص" aria-label="نسخ النص">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+                <button id="btn-download" class="icon-btn" title="تحميل ملف نصي" aria-label="تحميل ملف نصي">
+                    <i class="fa-solid fa-download"></i>
+                </button>
+            </div>
+
+            <div class="main-action">
+                <button id="btn-mic" class="mic-btn" aria-label="تشغيل / إيقاف الميكروفون">
+                    <i class="fa-solid fa-microphone"></i>
+                    <div class="mic-waves"></div>
+                    <div class="mic-waves-2"></div>
+                </button>
+            </div>
+
+            <div class="action-group secondary-actions right-align">
+                <button id="btn-clear" class="icon-btn danger" title="مسح النص" aria-label="مسح النص">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
