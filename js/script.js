@@ -268,6 +268,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const selectedText = languageSelect.options[nextIndex].text;
         showToast(`اللغة: ${selectedText}`);
+
+        // Automatically start recording after a short delay
+        setTimeout(() => {
+            if (!isRecording) {
+                toggleRecording();
+            }
+        }, 300);
     }
 
     // Keyboard shortcut listener
