@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition = new window.SpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
-        recognition.lang = languageSelect.value;
+        if (languageSelect.value) {
+            recognition.lang = languageSelect.value;
+        } else {
+            recognition.lang = '';
+        }
 
         recognition.onstart = () => {
             isRecording = true;
@@ -132,7 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
             stopRecording();
         } else {
             try {
-                recognition.lang = languageSelect.value;
+                if (languageSelect.value) {
+                    recognition.lang = languageSelect.value;
+                } else {
+                    recognition.lang = '';
+                }
                 recognition.start();
             } catch (e) {
                 console.error('Error starting recognition:', e);
