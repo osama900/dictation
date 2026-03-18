@@ -36,16 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             recordingDot.classList.add('listening');
             recordingStatus.textContent = 'جاري الاستماع...';
 
-            // Sync up final transcript if the user typed something while stopped
             finalTranscript = resultText.value;
             interimTranscript = '';
-
-            if (finalTranscript.length > 0 && !finalTranscript.endsWith(' ') && !finalTranscript.endsWith('\n')) {
-                finalTranscript += ' ';
-                isScriptEdit = true;
-                resultText.value = finalTranscript;
-                isScriptEdit = false;
-            }
         };
 
         recognition.onresult = (event) => {
@@ -63,6 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add any newly finalized words to our main body of text
             if (newFinal.length > 0) {
+                // Add a space ONLY if the existing transcript doesn't already have one
+                if (finalTranscript.length > 0 && !finalTranscript.endsWith(' ') && !finalTranscript.endsWith('\n')) {
+                    finalTranscript += ' ';
+                }
                 finalTranscript += newFinal;
             }
             interimTranscript = currentInterim;
@@ -238,5 +234,48 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }, 100);
+    });
+
+    // Toast notification function
+    function showToast(message, iconClass = 'fa-solid fa-language') {
+        let toast = document.getElementById('app-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'app-toast';
+            toast.className = 'toast-container';
+            document.body.appendChild(toast);
+        }
+
+        toast.innerHTML = `<i class="${iconClass} toast-icon"></i><span>${message}</span>`;
+        toast.classList.add('show');
+
+        clearTimeout(toast.timeout);
+        toast.timeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Cycle language function
+    function cycleLanguage() {
+        if (!languageSelect) return;
+        
+        const nextIndex = (languageSelect.selectedIndex + 1) % languageSelect.options.length;
+        languageSelect.selectedIndex = nextIndex;
+        
+        // Trigger the change event logic
+        const event = new Event('change');
+        languageSelect.dispatchEvent(event);
+        
+        const selectedText = languageSelect.options[nextIndex].text;
+        showToast(`اللغة: ${selectedText}`);
+    }
+
+    // Keyboard shortcut listener
+    window.addEventListener('keydown', (e) => {
+        // Alt + L
+        if (e.altKey && (e.key.toLowerCase() === 'n' || e.code === 'KeyL')) {
+            e.preventDefault();
+            cycleLanguage();
+        }
     });
 });

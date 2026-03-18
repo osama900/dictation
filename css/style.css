@@ -126,6 +126,7 @@ body {
     font-size: 2rem;
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -136,6 +137,7 @@ body {
     letter-spacing: -0.5px;
     background: linear-gradient(135deg, #fff, #cbd5e1);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -408,4 +410,37 @@ textarea::placeholder {
         width: 44px;
         height: 44px;
     }
+}
+
+/* Toast Notification */
+.toast-container {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(30, 41, 59, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    padding: 12px 24px;
+    border-radius: 100px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-weight: 500;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.toast-container.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+    color: var(--accent-color);
+    font-size: 1.1rem;
 }
